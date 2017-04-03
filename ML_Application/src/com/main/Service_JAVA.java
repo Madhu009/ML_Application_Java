@@ -44,5 +44,31 @@ public class Service_JAVA {
 		return result;
 	}
 	
+	//Login check 
+	@POST
+	@Path("/login")
+	@Produces(MediaType.APPLICATION_JSON)
+	public String checkLogin(String result) throws JSONException
+	{
+		String res="";
+		JSONObject obj=new JSONObject(result);
+		
+		String name=obj.getString("name");
+		String pwd=obj.getString("pwd");
+		Document doc = new Document("name", name)
+  				.append("pwd",pwd);
+		MongoConnection conn=new MongoConnection();
+		boolean auth=conn.userAuth(doc);
+		
+		if(auth)
+		{
+			System.out.println("User existed");
+			res="yes";
+		}
+		else
+			System.out.println("User not existed");
+		return res;
+	}
+	
 	
 }

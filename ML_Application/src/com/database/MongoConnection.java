@@ -14,12 +14,20 @@ public class MongoConnection {
 	   MongoCollection<Document> collection = database.getCollection("test");
 	   
    public void insert(Document doc) {
-
-	   
-	 
-		
-       System.out.println("running");
+	   System.out.println("running");
 	   collection.insertOne(doc);
+   }
+   
+   public boolean userAuth(Document doc)
+   {
+	   boolean auth=false;
+	   
+	   if(collection.count(doc)==1)
+	   {
+		   auth=true;
+	   }
+	  
+	   return auth;
    }
 }
 
