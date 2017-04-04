@@ -1,7 +1,9 @@
 package com.main;
+import java.io.ByteArrayInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Base64;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -85,11 +87,21 @@ public class Service_JAVA {
 	@POST
 	@Path("/upload")
 	@Produces(MediaType.APPLICATION_JSON)
-	public String test(InputStream image) throws JSONException, FileNotFoundException
+	public String test(String result) throws JSONException, FileNotFoundException
 	{
-		ImageDataOperations IDO=new ImageDataOperations();
-		IDO.upload(image, "filename");
-		return "yes";
+	
+		System.out.println();
+		JSONObject obj=new JSONObject(result);
+		String inputImage=obj.getString("image");
+		String name=obj.getString("name");
+		// Decode
+        byte[] base64decodedBytes = Base64.getDecoder().decode(inputImage);
+        InputStream is = new ByteArrayInputStream(base64decodedBytes);
+		
+        ImageDataOperations IDO=new ImageDataOperations();
+		IDO.upload(is, name);
+		System.out.println("working");
+		return "Uploaded Successfully";
 		
 	}
 	

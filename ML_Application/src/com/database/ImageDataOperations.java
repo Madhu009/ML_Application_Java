@@ -33,12 +33,12 @@ public class ImageDataOperations {
 	  ImageDataOperations gridFs = new ImageDataOperations();
 	//  ObjectId babyBoyObjectId = gridFs.upload("C:/Users/Madhu/Desktop/IMG_9034.JPG","baby-boy");
 	  //ObjectId babyGirlObjectId = gridFs.upload("C:/Users/Madhu/Desktop/IMG_9046.JPG","baby-girl");
-	  gridFs.findAll();
+	//  gridFs.findAll();
 	  //gridFs.find(babyGirlObjectId);
-	  gridFs.download("baby-boy");
+	  gridFs.download("madhu");
 	  //gridFs.rename(babyBoyObjectId,"new-baby-image");
 	  //gridFs.delete(babyBoyObjectId);
-	  gridFs.findAll();
+	 // gridFs.findAll();
 	 }
 	 
 	    // Upload File
@@ -50,7 +50,7 @@ public class ImageDataOperations {
 		 ObjectId fileId = null;
 		 try 
 		 {
-			 MongoDatabase database = mongoClient.getDatabase("test1");
+			 MongoDatabase database = mongoClient.getDatabase("test2");
 			 GridFSBucket gridBucket = GridFSBuckets.create(database);
 			
 			 // Create some custom options
@@ -138,7 +138,7 @@ public class ImageDataOperations {
 	 
 		  try 
 		  {
-			  MongoDatabase database = mongoClient.getDatabase("test1");
+			  MongoDatabase database = mongoClient.getDatabase("test2");
 			  GridFSBucket gridBucket = GridFSBuckets.create(database);
 			  FileOutputStream fileOutputStream = new FileOutputStream("C:/Users/Madhu/Desktop/MongoDB/a.jpg");
 			  gridBucket.downloadToStream(fileName, fileOutputStream);
