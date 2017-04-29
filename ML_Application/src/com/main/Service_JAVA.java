@@ -84,6 +84,8 @@ public class Service_JAVA {
 		return res;
 	}
 	
+	
+	
 	@POST
 	@Path("/upload")
 	@Produces(MediaType.APPLICATION_JSON)
@@ -93,18 +95,35 @@ public class Service_JAVA {
 		System.out.println();
 		JSONObject obj=new JSONObject(result);
 		String inputImage=obj.getString("image");
-		String name=obj.getString("name");
 		// Decode
         byte[] base64decodedBytes = Base64.getDecoder().decode(inputImage);
         InputStream is = new ByteArrayInputStream(base64decodedBytes);
 		
         ImageDataOperations IDO=new ImageDataOperations();
-		IDO.upload(is, name);
-		System.out.println("working");
-		return "Uploaded Successfully";
+		IDO.upload(is, "name");
+		
+		JSONObject response=new JSONObject();
+		response.put("response", "yes");
+		response.put("msg", "done");
+		response.put("image", "notnull");
+		
+		return response.toString();
 		
 	}
 	
+	//Login check 
+		@POST
+		@Path("/chat")
+		@Produces(MediaType.APPLICATION_JSON)
+		public String chekChat(String result) throws JSONException
+		{
+			System.out.println(result);
+			JSONObject obj=new JSONObject();
+			obj.put("response", "yes");
+			obj.put("msg", "Hi I am a bot How can i help you??");
+			
+			return obj.toString();
+		}
 	
 	
 }
